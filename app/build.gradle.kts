@@ -74,4 +74,10 @@ dependencies {
     implementation(libs.camera.extensions)
     implementation(libs.camera.view)
     implementation(libs.camera.video)
+
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.runtime.livedata)
+    implementation(libs.runtime.rxjava2)
+    implementation(libs.coil.compose)
+    implementation(libs.kotlinx.coroutines.core)
 }
