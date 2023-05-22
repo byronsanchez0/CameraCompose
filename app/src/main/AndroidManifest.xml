@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraCompose"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value= "AIzaSyBXKequHBZq3zItJP-RKacI07ajtOxRIdk" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

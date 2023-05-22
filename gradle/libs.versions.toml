@@ -1,5 +1,5 @@
 [versions]
-com-android-application = "8.1.0-beta03"
+com-android-application = "8.0.0"
 org-jetbrains-kotlin-android = "1.7.20"
 core-ktx = "1.9.0"
 junit = "4.13.2"
@@ -19,6 +19,7 @@ coil_compose = "2.3.0"
 kotlinx_coroutines_core = "1.6.4"
 maps-compose-version= "2.11.0"
 play-services-maps-version= "18.1.0"
+google-maps-platform-libraries-version= "2.0.1"
 
 
 [libraries]
@@ -63,6 +64,7 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+google-android-mapsplatform = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "google-maps-platform-libraries-version" }
 
 [bundles]
 

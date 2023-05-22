@@ -1,5 +1,7 @@
 package com.example.cameracompose
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -20,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cameracompose.navigation.BottomNavGraph
 import com.example.cameracompose.navigation.BottomNavItem
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {

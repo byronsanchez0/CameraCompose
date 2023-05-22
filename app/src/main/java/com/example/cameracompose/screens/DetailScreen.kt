@@ -23,7 +23,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Composable
 fun DetailScreen(path: String) {
     val location = getLocationFromImage(path)
-    val photo = LatLng(location?.first?: 0.0, location?.second?:0.0)
+    val photo = LatLng(location?.first ?: 0.0, location?.second ?: 0.0)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(photo, 10f)
     }
@@ -35,9 +35,12 @@ fun DetailScreen(path: String) {
                 .build(),
             contentDescription = "icon",
             contentScale = ContentScale.Inside,
+            modifier = Modifier.size(width = 300.dp, height = 300.dp)
         )
         GoogleMap(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+//                .fillMaxSize()
+                .size(width = 300.dp, height = 300.dp),
             cameraPositionState = cameraPositionState
         ) {
             Marker(
@@ -47,7 +50,6 @@ fun DetailScreen(path: String) {
             )
         }
     }
-
 
 
 }

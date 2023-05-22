@@ -25,7 +25,7 @@ import com.example.cameracompose.CameraViewModel
 @Composable
 fun HomeScreen(viewmodel: CameraViewModel, navHostController: NavHostController) {
     var myList = viewmodel.getImagesFromGallery().collectAsState(emptyList())
-    var images = myList.value
+    var images = myList.value.reversed()
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(200.dp),

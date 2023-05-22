@@ -1,5 +1,7 @@
 package com.example.cameracompose.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
@@ -12,6 +14,7 @@ import com.example.cameracompose.screens.CameraScreen
 import com.example.cameracompose.screens.DetailScreen
 import com.example.cameracompose.screens.HomeScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BottomNavGraph(navHostController: NavHostController) {
     val viewmodel = remember {
