@@ -1,6 +1,10 @@
 package com.example.cameracompose.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -13,6 +17,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.sharp.AddCircle
+import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,12 +40,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.example.cameracompose.CameraViewModel
 import com.example.cameracompose.R
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
 @Composable
 fun CameraScreen(viewmodel: CameraViewModel) {
-
-
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +68,7 @@ fun Camera(viewModel: CameraViewModel) {
     val previewView = remember {
         PreviewView(context)
     }
-    FloatingActionButton(onClick = { viewModel.takePhoto(context) }) {
+    FloatingActionButton(onClick = { viewModel.takePhotoWithLocation(context) }) {
         Icon(
 
             imageVector = Icons.Sharp.AddCircle,
@@ -107,4 +111,36 @@ fun TakePhoto(viewModel:CameraViewModel){
     val context = LocalContext.current
 
 
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+private fun FeatureThatRequiresCameraPermission() {
+
+    // Camera permission state
+    val cameraPermissionState = rememberPermissionState(
+        android.Manifest.permission.CAMERA
+    )
+
+    if (cameraPermissionState.status.isGranted) {
+        Text("Camera permission Granted")
+    } else {
+        Column {
+            val textToShow = if (cameraPermissionState.status.shouldShowRationale) {
+                // If the user has denied the permission but the rationale can be shown,
+                // then gently explain why the app requires this permission
+                "The camera is important for this app. Please grant the permission."
+            } else {
+                // If it's the first time the user lands on this feature, or the user
+                // doesn't want to be asked again for this permission, explain that the
+                // permission is required
+                "Camera permission required for this feature to be available. " +
+                        "Please grant the permission"
+            }
+            Text(textToShow)
+            Button(onClick = { cameraPermissionState.launchPermissionRequest() }) {
+                Text("Request permission")
+            }
+        }
+    }
 }

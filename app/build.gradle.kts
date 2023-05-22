@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -80,4 +81,10 @@ dependencies {
     implementation(libs.runtime.rxjava2)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.core)
+
+    implementation(libs.play.services.location)
+    implementation(libs.maps.play.services)
+    implementation(libs.compose.maps)
+    implementation(libs.accompanist.permissions)
+
 }
