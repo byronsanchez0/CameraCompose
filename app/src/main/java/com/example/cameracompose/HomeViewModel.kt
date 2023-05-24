@@ -19,23 +19,4 @@ class HomeViewModel : ViewModel() {
         imagesStateFlow.value = imageFiles
         return imagesStateFlow
     }
-    companion object {
-        const val IMG_TYPE = "image/jpeg"
-        const val IMG_DIRECTORY = "Pictures/CameraX-Folder"
-        private const val TAG = "CameraXApp"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS =
-            mutableListOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
-                    add(Manifest.permission.READ_MEDIA_IMAGES)
-                }
-            }.toTypedArray()
-
-        const val image_extension: String = "jpg"
-    }
 }

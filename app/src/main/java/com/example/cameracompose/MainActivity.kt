@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION,
     )
     private val viewModel = CameraViewModel()
-    @OptIn(ExperimentalPermissionsApi::class)
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
             val dialogQueue = viewModel.visiblePermissionsDialogQueue
             val multiplePermissionResult = rememberLauncherForActivityResult(
                 contract = ActivityResultContracts.RequestMultiplePermissions(),
-                onResult = {perms->
+                onResult = { perms ->
                     permissionsToRequest.forEach { permission ->
                         viewModel.onPermissionResult(
                             permission = permission, isGranted = perms[permission] == true
@@ -56,8 +56,8 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             )
-            dialogQueue.reversed().forEach{permission ->
-                PermissionDialog(permissionTextProvider = when(permission) {
+            dialogQueue.reversed().forEach { permission ->
+                PermissionDialog(permissionTextProvider = when (permission) {
                     Manifest.permission.CAMERA -> {
                         CameraPermissionText()
                     }
@@ -65,6 +65,7 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.ACCESS_FINE_LOCATION -> {
                         LocationPermissionText()
                     }
+
                     else -> return@forEach
                 }, isPermanentlyDeclined = !shouldShowRequestPermissionRationale(permission),
                     onDismiss = viewModel::dismissDialog,
@@ -74,53 +75,21 @@ class MainActivity : ComponentActivity() {
                             arrayOf(permission)
                         )
                     },
-                    onGoSetting = {openSetting()}
-                    )
+                    onGoSetting = { openSetting() }
+                )
             }
-            LaunchedEffect(Unit){
+            LaunchedEffect(Unit) {
                 multiplePermissionResult.launch(
                     permissionsToRequest
                 )
             }
             CameraComposeTheme {
-                // A surface container using the 'background' color from the theme
                 MainScreen()
             }
-//            @Composable
-//            fun RequestPermission() {
-//                var permissionsState = rememberMultiplePermissionsState(
-//                    permissions = listOf(
-//                        Manifest.permission.CAMERA,
-//                        Manifest.permission.ACCESS_FINE_LOCATION,
-//                        Manifest.permission.ACCESS_COARSE_LOCATION,
-//                        Manifest.permission.READ_EXTERNAL_STORAGE,
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                    )
-//                )
-//
-//                permissionsState.permissions.forEach { perms ->
-//                    when (perms.permission) {
-//                        Manifest.permission.CAMERA -> {
-//                            CameraPermissionText()
-//                        }
-//
-//                        Manifest.permission.ACCESS_FINE_LOCATION -> {
-//                            LocationPermissionText()
-//                        }
-//                    }
-//                }
-//                Column(
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    modifier = Modifier.size(300.dp)
-//                ) {
-//                    Button(onClick = { permissionsState.launchMultiplePermissionRequest() }) {
-//                        Text(text = "Allow permission")
-//                    }
-//                }
-//            }
         }
 
     }
+
     private fun Activity.openSetting() {
         Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
