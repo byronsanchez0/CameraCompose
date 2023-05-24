@@ -82,12 +82,13 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.core)
 
-
-
-
     implementation(libs.play.services.location)
     implementation(libs.maps.play.services)
     implementation(libs.compose.maps)
     implementation(libs.accompanist.permissions)
+
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.compose.material.icons.extended)
 
 }

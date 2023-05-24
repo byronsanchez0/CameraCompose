@@ -30,8 +30,8 @@ fun DetailScreen(
     detailsViewModel: DetailsViewModel
 ) {
 
-    val location by detailsViewModel.getLocation(path).collectAsState(Pair(0.0, 0.0))
-    val photo = LatLng(location.first, location.second )
+    val location = detailsViewModel.getLocationFromImage(path)
+    val photo = LatLng(location?.first?: 0.0, location?.second?:0.0 )
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(photo, 10f)
     }

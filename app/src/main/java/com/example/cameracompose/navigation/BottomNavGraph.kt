@@ -2,8 +2,11 @@ package com.example.cameracompose.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -19,7 +22,7 @@ import com.example.cameracompose.screens.HomeScreen
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BottomNavGraph(navHostController: NavHostController) {
-    val viewmodel = remember {
+    val cameraViewModel = remember {
         CameraViewModel()
     }
     val homeViewModel = remember {
@@ -36,7 +39,7 @@ fun BottomNavGraph(navHostController: NavHostController) {
             HomeScreen(homeViewModel, navHostController)
         }
         composable(route= BottomNavItem.OpenCamera.route){
-            CameraScreen(viewmodel = viewmodel)
+            CameraScreen(cameraViewModel)
         }
         composable("DetailScreen?path={path}", ){ backStackEntry ->
             println(backStackEntry)

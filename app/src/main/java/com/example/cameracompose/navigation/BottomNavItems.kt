@@ -1,6 +1,7 @@
 package com.example.cameracompose.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -15,7 +16,7 @@ sealed class BottomNavItem(
     )
     object OpenCamera : BottomNavItem(
         "OpenCamera",
-        Icons.Outlined.Home,
+        Icons.Outlined.CameraAlt,
         "openCamera"
     )
 

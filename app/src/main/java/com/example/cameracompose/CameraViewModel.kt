@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
@@ -35,12 +36,24 @@ import java.nio.file.attribute.BasicFileAttributes
 import kotlin.io.path.Path
 
 class CameraViewModel : ViewModel() {
+    val visiblePermissionsDialogQueue = mutableStateListOf<String>()
     var imageCapture: ImageCapture? = null
-    val latitud = MutableStateFlow<Double>(0.0)
-    val longitude = MutableStateFlow<Double>(0.0)
     private val _capturedPhoto = MutableStateFlow<ByteArray?>(null)
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var cameraExecutor: ExecutorService
+
+    fun dismissDialog() {
+        visiblePermissionsDialogQueue.removeFirst()
+    }
+
+    fun onPermissionResult(
+        permission: String,
+        isGranted: Boolean
+    ) {
+        if (!isGranted && !visiblePermissionsDialogQueue.contains(permission)) {
+            visiblePermissionsDialogQueue.add(permission)
+        }
+    }
 
 
 
@@ -64,59 +77,7 @@ class CameraViewModel : ViewModel() {
 
         return null
     }
-//    fun getFileMetadata(filePath: String): BasicFileAttributes? {
-//        try {
-//            val file = Path(filePath)
-//            return Files.readAttributes(file, BasicFileAttributes::class.java)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//
-//        return null
-//    }
 
-
-    //    private val context = LocalContext.current
-//
-//
-//
-//    private fun startCamera() {
-//
-//
-//
-//        val cameraProviderFuture = ProcessCameraProvider.getInstance()
-//
-//        cameraProviderFuture.addListener({
-//            // Used to bind the lifecycle of cameras to the lifecycle owner
-//            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-//
-//            // Preview
-//            val preview = Preview.Builder()
-//                .build()
-//                .also {
-//                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-//                }
-//
-//            imageCapture = ImageCapture.Builder().build()
-//
-//            // Select back camera as a default
-//            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-//
-//            try {
-//                // Unbind use cases before rebinding
-//                cameraProvider.unbindAll()
-//
-//                // Bind use cases to camera
-//                cameraProvider.bindToLifecycle(
-//                    this, cameraSelector, preview, imageCapture
-//                )
-//
-//            } catch (exc: Exception) {
-//                Log.e(TAG, "Use case binding failed", exc)
-//            }
-//
-//        }, ContextCompat.getMainExecutor(requireContext()))
-//    }
     @SuppressLint("MissingPermission")
     fun takePhotoWithLocation(context: Context) {
 //        allPermissionsGranted(context)
