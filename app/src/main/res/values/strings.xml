@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CameraCompose</string>
+    <string name="album_descr">image\n</string>
 </resources>
