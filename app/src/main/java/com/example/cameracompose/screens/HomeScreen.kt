@@ -19,12 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cameracompose.CameraViewModel
+import com.example.cameracompose.HomeViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(viewmodel: CameraViewModel, navHostController: NavHostController) {
-    var myList = viewmodel.getImagesFromGallery().collectAsState(emptyList())
+fun HomeScreen(homeViewModel: HomeViewModel, navHostController: NavHostController) {
+    var myList = homeViewModel.getImagesFromGallery().collectAsState(emptyList())
     var images = myList.value.reversed()
 
     LazyVerticalStaggeredGrid(
@@ -50,21 +51,5 @@ fun HomeScreen(viewmodel: CameraViewModel, navHostController: NavHostController)
         },
         modifier = Modifier.fillMaxSize()
     )
-//        LazyColumn(
-//            Modifier
-//                .padding(it)
-//                .fillMaxSize()
-//        ) {
-//            items(myList){
-//                Image(
-//                    painter = rememberAsyncImagePainter(myList.size),
-//                    contentDescription = stringResource(R.string.album_descr),
-//                    modifier = Modifier
-//                        .size(65.dp)
-//                        .clip(RoundedCornerShape(4.dp))
-//                )
-//            }
-//        }
-
 
 }

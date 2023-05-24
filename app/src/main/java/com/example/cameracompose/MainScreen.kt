@@ -1,5 +1,6 @@
 package com.example.cameracompose
 
+import android.Manifest
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
@@ -21,11 +22,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cameracompose.navigation.BottomNavGraph
 import com.example.cameracompose.navigation.BottomNavItem
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen() {
+//    val coarseLocationPermissionStates = rememberPermissionState(
+//        Manifest.permission.ACCESS_COARSE_LOCATION
+//    )
+//    coarseLocationPermissionStates.launchPermissionRequest()
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navHostController = navController)}

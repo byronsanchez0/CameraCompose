@@ -56,7 +56,6 @@ fun CameraScreen(viewmodel: CameraViewModel) {
             .background(colorResource(id = R.color.teal_700))
             .wrapContentSize(Alignment.Center)
     ) {
-        AlertDialogSample()
         Camera(viewmodel)
     }
 }
@@ -77,7 +76,7 @@ fun Camera(viewModel: CameraViewModel) {
         PreviewView(context)
     }
     FeatureThatRequiresCameraPermission()
-
+    AlertDialogSample()
     FloatingActionButton(onClick = { viewModel.takePhotoWithLocation(context) }) {
         Icon(
 
@@ -139,12 +138,12 @@ private fun FeatureThatRequiresCameraPermission() {
     val cameraPermissionState = rememberPermissionState(
         Manifest.permission.CAMERA
     )
-//    val readFilesPermissionState = rememberPermissionState(
-//        Manifest.permission.READ_EXTERNAL_STORAGE
-//    )
-//    val writeFilesPermissionState = rememberPermissionState(
-//        Manifest.permission.WRITE_EXTERNAL_STORAGE
-//    )
+    val readFilesPermissionState = rememberPermissionState(
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+    val writeFilesPermissionState = rememberPermissionState(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
     val fineLocationPermissionStates = rememberPermissionState(
         Manifest.permission.ACCESS_FINE_LOCATION
 //                && writeFilesPermissionState.shouldShowRationale
@@ -176,17 +175,19 @@ private fun FeatureThatRequiresCameraPermission() {
                 // permission is required
                 "Camera permission required for this feature to be available. " +
                         "Please grant the permission"
+//                cameraPermissionState.launchPermissionRequest()
+
             }
-            Text(textToShow)
-            Button(onClick = { cameraPermissionState.launchPermissionRequest() }) {
-                Text("Request permission")
-            }
-            Button(onClick = { fineLocationPermissionStates.launchPermissionRequest() }) {
-                Text("Request permission")
-            }
-            Button(onClick = { coarseLocationPermissionStates.launchPermissionRequest() }) {
-                Text("Request permission")
-            }
+//            Text(textToShow)
+//            Button(onClick = { cameraPermissionState.launchPermissionRequest() }) {
+//                Text("Request permission")
+//            }
+//            Button(onClick = { fineLocationPermissionStates.launchPermissionRequest() }) {
+//                Text("Request permission")
+//            }
+//            Button(onClick = { coarseLocationPermissionStates.launchPermissionRequest() }) {
+//                Text("Request permission")
+//            }
 
         }
     }

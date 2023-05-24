@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.media.ExifInterface
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -35,24 +36,34 @@ import kotlin.io.path.Path
 
 class CameraViewModel : ViewModel() {
     var imageCapture: ImageCapture? = null
-
+    val latitud = MutableStateFlow<Double>(0.0)
+    val longitude = MutableStateFlow<Double>(0.0)
     private val _capturedPhoto = MutableStateFlow<ByteArray?>(null)
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var cameraExecutor: ExecutorService
 
 
 
-    fun getImagesFromGallery(): StateFlow<List<File>> {
-        val imagesStateFlow = MutableStateFlow<List<File>>(emptyList())
-        val imageFolder = File(Environment.getExternalStorageDirectory(), "Pictures/CameraX-Folder")
-        val imageFiles = imageFolder.listFiles()?.filter {
-            it.extension == image_extension
-        }?.toList() ?: emptyList()
 
-        imagesStateFlow.value = imageFiles
-        return imagesStateFlow
-    }
     @RequiresApi(Build.VERSION_CODES.O)
+
+    fun getLocationFromImage(imagePath: String): Pair<Double, Double>? {
+        try {
+            val exifInterface = ExifInterface(imagePath)
+            val latLong = FloatArray(2)
+            val hasLatLong = exifInterface.getLatLong(latLong)
+
+            if (hasLatLong) {
+                val latitude = latLong[0].toDouble()
+                val longitude = latLong[1].toDouble()
+                return Pair(latitude, longitude)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return null
+    }
 //    fun getFileMetadata(filePath: String): BasicFileAttributes? {
 //        try {
 //            val file = Path(filePath)
