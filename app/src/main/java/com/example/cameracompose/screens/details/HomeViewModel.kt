@@ -1,9 +1,8 @@
-package com.example.cameracompose
+package com.example.cameracompose.screens.details
 
-import android.Manifest
-import android.os.Build
 import android.os.Environment
 import androidx.lifecycle.ViewModel
+import com.example.cameracompose.screens.camera.CameraViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.File

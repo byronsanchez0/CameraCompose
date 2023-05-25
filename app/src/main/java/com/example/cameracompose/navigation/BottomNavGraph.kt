@@ -2,22 +2,17 @@ package com.example.cameracompose.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cameracompose.CameraViewModel
-import com.example.cameracompose.DetailsViewModel
-import com.example.cameracompose.HomeViewModel
-import com.example.cameracompose.navigation.BottomNavItem
-import com.example.cameracompose.screens.CameraScreen
-import com.example.cameracompose.screens.DetailScreen
-import com.example.cameracompose.screens.HomeScreen
+import com.example.cameracompose.screens.camera.CameraViewModel
+import com.example.cameracompose.screens.details.DetailsViewModel
+import com.example.cameracompose.screens.details.HomeViewModel
+import com.example.cameracompose.screens.camera.CameraScreen
+import com.example.cameracompose.screens.details.DetailScreen
+import com.example.cameracompose.screens.home.HomeScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

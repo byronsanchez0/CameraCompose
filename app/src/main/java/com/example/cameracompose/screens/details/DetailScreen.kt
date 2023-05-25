@@ -1,15 +1,9 @@
-package com.example.cameracompose.screens
+package com.example.cameracompose.screens.details
 
-import android.media.ExifInterface
-import android.media.MediaMetadataRetriever
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -17,14 +11,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.cameracompose.DetailsViewModel
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import kotlinx.coroutines.flow.first
 
 @Composable
 fun DetailScreen(
@@ -48,7 +40,7 @@ fun DetailScreen(
                 .build(),
             contentDescription = "icon",
             contentScale = ContentScale.Inside,
-            modifier = Modifier.size(width = 500.dp, height = 500.dp),
+            modifier = Modifier.size(width = 500.dp, height = 300.dp),
         )
         GoogleMap(
             modifier = Modifier

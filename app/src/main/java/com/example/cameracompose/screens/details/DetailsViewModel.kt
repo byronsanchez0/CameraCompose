@@ -1,4 +1,4 @@
-package com.example.cameracompose
+package com.example.cameracompose.screens.details
 
 import android.media.ExifInterface
 import androidx.lifecycle.ViewModel
